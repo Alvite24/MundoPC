@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Completa de Mantenimiento PC | Mundo PC</title>
+    <meta name="description" content="La guía más completa en español para mantener tu PC: limpieza física, optimización de software, control de temperaturas y tests de estrés con OCCT.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .guide-index {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+        .guide-index h3 { margin-bottom: 15px; color: var(--primary-color); }
+        .guide-index ol { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+        .guide-index a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+        .guide-index a:hover { color: var(--primary-color); }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-right: 12px;
+        }
+        .step-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            margin-bottom: 15px;
+        }
+        .step-row p { flex: 1; margin: 0; color: var(--text-muted); line-height: 1.7; }
+
+        .warning-box {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid #ef4444;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .warning-box i { color: #ef4444; margin-top: 3px; flex-shrink: 0; }
+
+        .tip-box {
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .tip-box i { color: var(--primary-color); margin-top: 3px; flex-shrink: 0; }
+
+        .tool-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            transition: border-color 0.3s;
+            margin-bottom: 15px;
+        }
+        .tool-card:hover { border-color: var(--primary-color); }
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            flex-shrink: 0;
+        }
+        .tool-name { font-weight: 700; margin-bottom: 4px; }
+        .tool-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+        .tool-link { display: inline-block; margin-top: 8px; font-size: 0.82rem; color: var(--primary-color); text-decoration: none; font-weight: 600; }
+        .tool-link:hover { text-decoration: underline; }
+
+        .occt-test {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 15px;
+        }
+        .occt-test h4 { font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .occt-test p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .badge-test {
+            font-size: 0.7rem;
+            padding: 3px 9px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+        .badge-easy { background: rgba(16,185,129,0.15); color: #10b981; }
+        .badge-medium { background: rgba(245,158,11,0.15); color: #f59e0b; }
+        .badge-hard { background: rgba(239,68,68,0.15); color: #ef4444; }
+
+        .temp-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) { .temp-grid { grid-template-columns: 1fr; } }
+        .temp-card {
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .temp-card .temp-val { font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
+        .temp-card .temp-label { font-weight: 600; margin-bottom: 5px; }
+        .temp-card .temp-range { font-size: 0.82rem; color: var(--text-muted); }
+
+        .section-intro {
+            max-width: 820px;
+            margin: 0 auto 40px;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .maint-section { max-width: 820px; margin: 0 auto; }
+        .maint-section h3 { font-size: 1.3rem; margin: 35px 0 15px; color: var(--text-color); display: flex; align-items: center; gap: 10px; }
+        .maint-section h3 i { color: var(--primary-color); }
+        .maint-section p { color: var(--text-muted); line-height: 1.8; margin-bottom: 15px; }
+        .maint-section ul, .maint-section ol { padding-left: 22px; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .maint-section li { line-height: 1.7; }
+        .maint-section strong { color: var(--text-color); }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fa-solid fa-microchip"></i> Mundo <span class="highlight">PC</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="builder.html">Configurador</a></li>
+                <li><a href="mantenimiento.html" class="highlight">Mantenimiento</a></li>
+                <li id="auth-node"><button class="btn btn-outline" id="login-btn" style="padding: 8px 16px; font-size: 0.9rem;">Iniciar Sesión</button></li>
+            </ul>
+            <div class="nav-controls">
+                <div class="theme-toggle">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                </div>
+                <div class="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero" style="min-height: 300px; height: auto; padding: 70px 0;">
+            <div class="container hero-content">
+                <h1>Guía Completa de <span class="highlight">Mantenimiento PC</span></h1>
+                <p>Todo lo que necesitas saber para mantener tu PC limpio, rápido y estable. Desde la limpieza física hasta los tests de estrés profesionales.</p>
+            </div>
+            <div class="hero-bg-overlay"></div>
+        </section>
+
+        <!-- Índice -->
+        <section class="section" style="padding: 50px 0;">
+            <div class="container">
+                <div class="guide-index">
+                    <h3><i class="fa-solid fa-list-ul"></i> Índice de contenidos</h3>
+                    <ol>
+                        <li><a href="#limpieza"><i class="fa-solid fa-broom" style="color: var(--primary-color); margin-right: 6px;"></i> Limpieza Física — Herramientas, pasta térmica y flujo de aire</a></li>
+                        <li><a href="#software"><i class="fa-brands fa-windows" style="color: var(--primary-color); margin-right: 6px;"></i> Optimización de Software — Drivers, archivos basura y arranque</a></li>
+                        <li><a href="#temperaturas"><i class="fa-solid fa-temperature-full" style="color: var(--primary-color); margin-right: 6px;"></i> Control de Temperaturas — Rangos, herramientas y soluciones</a></li>
+                        <li><a href="#tests"><i class="fa-solid fa-bolt" style="color: var(--primary-color); margin-right: 6px;"></i> Tests de Estrés — OCCT y otras herramientas para verificar estabilidad</a></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================== -->
+        <!-- SECCIÓN 1: LIMPIEZA     -->
+        <!-- ======================== -->
+        <section id="limpieza" class="section" style="padding-top: 40px;">
+            <div class="container">
+                <h2 class="section-title"><i class="fa-solid fa-broom" style="color: var(--secondary-color);"></i> Limpieza Física</h2>
+                <p class="section-intro">
+                    El polvo es el enemigo silencioso de tu PC. Se acumula en ventiladores, disipadores y rejillas, 
+                    bloqueando el flujo de aire y provocando sobrecalentamiento. Una limpieza cada 6 meses puede 
+                    reducir las temperaturas hasta <strong style="color: var(--primary-color);">10-15°C</strong> y prolongar la vida útil de tus componentes varios años.
+                </p>
+
+                <div class="maint-section">
+                    <h3><i class="fa-solid fa-toolbox"></i> Materiales necesarios</h3>
+                    <p>Antes de abrir el PC, asegúrate de tener todo a mano. No necesitas invertir mucho: con menos de 20€ tienes todo lo esencial.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-wind" style="color: var(--primary-color); margin-right: 6px;"></i> <strong>Aire comprimido en lata</strong> (o soplador eléctrico de baja potencia) — Lo más importante. Expulsa el polvo sin tocar los componentes.</li>
+                        <li><i class="fa-solid fa-paintbrush" style="color: var(--primary-color); margin-right: 6px;"></i> <strong>Pincel o brocha de cerdas suaves</strong> — Para aflojar el polvo en esquinas y ranuras de la placa base.</li>
+                        <li><i class="fa-solid fa-screwdriver" style="color: var(--primary-color); margin-right: 6px;"></i> <strong>Destornillador de estrella Phillips</strong> — Para abrir el chasis y desmontar disipadores si es necesario.</li>
+                        <li><i class="fa-solid fa-droplet" style="color: var(--primary-color); margin-right: 6px;"></i> <strong>Pasta térmica de calidad</strong> (Arctic MX-6, Thermal Grizzly Kryonaut...) — Imprescindible si la vas a cambiar.</li>
+                        <li><i class="fa-solid fa-flask" style="color: var(--primary-color); margin-right: 6px;"></i> <strong>Alcohol isopropílico 90% o superior</strong> — Para limpiar la pasta térmica vieja del procesador y disipador.</li>
+                        <li><i class="fa-solid fa-hand-sparkles" style="color: var(--primary-color); margin-right: 6px;"></i> <strong>Bastoncillos de algodón y paño de microfibra</strong> — Para aplicar el alcohol y limpiar sin rayar.</li>
+                        <li><i class="fa-solid fa-shield-halved" style="color: var(--primary-color); margin-right: 6px;"></i> <strong>Pulsera antiestática</strong> (opcional pero recomendado) — Si no tienes, toca una superficie metálica con frecuencia para descargarte.</li>
+                    </ul>
+
+                    <div class="warning-box">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <p><strong>Nunca uses:</strong> Secadores de pelo (el calor daña los componentes), aspiradoras domésticas potentes (generan electricidad estática) ni productos de limpieza abrasivos o con agua.</p>
+                    </div>
+
+                    <h3><i class="fa-solid fa-list-check"></i> Pasos de limpieza paso a paso</h3>
+                    <p>Sigue este protocolo con calma. No hay prisa — una limpieza bien hecha es la que se nota.</p>
+
+                    <div class="step-row"><span class="step-number">1</span><p><strong>Apaga completamente el PC</strong> y desconéctalo de la corriente. No basta con ponerlo en suspensión. Retira también el cable del monitor, periféricos y todo lo conectado.</p></div>
+                    <div class="step-row"><span class="step-number">2</span><p><strong>Lleva el PC a un espacio abierto</strong> o bien ventilado, preferiblemente al exterior. El polvo liberado es abundante y puede ensuciar la habitación.</p></div>
+                    <div class="step-row"><span class="step-number">3</span><p><strong>Abre el panel lateral</strong> del chasis. Normalmente son dos tornillos en la parte trasera o un sistema de liberación rápida. Algunos tienen bloqueo — revisa el manual si no cede.</p></div>
+                    <div class="step-row"><span class="step-number">4</span><p><strong>Limpia los filtros de polvo</strong> primero. Si tu chasis los tiene (suelen estar en la parte frontal, inferior o superior), extráelos y golpéalos suavemente o échalos con agua y jabón. Que estén <strong>completamente secos</strong> antes de volverlos a poner.</p></div>
+                    <div class="step-row"><span class="step-number">5</span><p><strong>Aplica aire comprimido en ráfagas cortas</strong>. Mantén el bote vertical para evitar que salga líquido. <strong>Sujeta las aspas de los ventiladores con el dedo</strong> mientras soplas — si giran libremente pueden generar retroalimentación eléctrica o dañar los rodamientos.</p></div>
+                    <div class="step-row"><span class="step-number">6</span><p><strong>Usa el pincel</strong> para los rincones difíciles: entre los chips de la placa base, los slots de RAM vacíos y las ranuras PCIe. No frotes con fuerza — el objetivo es aflojar el polvo para que el aire lo expulse.</p></div>
+                    <div class="step-row"><span class="step-number">7</span><p><strong>Limpia la GPU y la PSU</strong> por sus rejillas externas. No desmontes la tarjeta gráfica si no sabes lo que haces — el aire comprimido por los huecos es más que suficiente.</p></div>
+                    <div class="step-row"><span class="step-number">8</span><p><strong>Cierra el panel y vuelve a conectar</strong> todo. Enciende el PC y monitorea las temperaturas durante 10-15 minutos para confirmar la mejora.</p></div>
+
+                    <h3><i class="fa-solid fa-rotate"></i> Cambio de pasta térmica</h3>
+                    <p>La pasta térmica es el material conductor entre el procesador (CPU) y el disipador. Con el tiempo se seca, se agrieta y pierde eficiencia. Si el CPU supera los 85°C bajo carga normal o llevas más de 2-3 años sin cambiarla, es el momento.</p>
+
+                    <div class="tip-box">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <p><strong>¿Cuándo cambiarla?</strong> Cada 2-3 años en condiciones normales, o antes si las temperaturas de la CPU han subido notablemente sin causa externa aparente.</p>
+                    </div>
+
+                    <ol>
+                        <li>Desmonta el disipador de la CPU (desconecta primero el cable del ventilador).</li>
+                        <li>Con alcohol isopropílico y un bastoncillo, limpia la pasta vieja de la superficie del procesador y la base del disipador. Hazlo en movimientos circulares hasta que no quede ningún residuo.</li>
+                        <li>Deja secar 1-2 minutos antes de aplicar la pasta nueva.</li>
+                        <li>Aplica una pequeña cantidad de pasta nueva <strong>del tamaño de un guisante</strong> en el centro del procesador. No la extiendas — la presión del disipador lo hará al montarlo.</li>
+                        <li>Monta el disipador con cuidado, apretando los tornillos en diagonal (en X) para distribuir la presión uniformemente.</li>
+                        <li>Reconecta el cable del ventilador.</li>
+                    </ol>
+
+                    <h3><i class="fa-solid fa-wind"></i> Flujo de aire: cómo optimizarlo</h3>
+                    <p>De nada sirve limpiar el PC si el flujo de aire está mal configurado. El principio es simple: el aire frío entra, el aire caliente sale.</p>
+                    <ul>
+                        <li><strong>Presión positiva:</strong> Más ventiladores de entrada (intake) que de salida (exhaust). El polvo entra principalmente por los filtros y no se acumula tanto en los componentes. Recomendado para la mayoría de usuarios.</li>
+                        <li><strong>Flujo frontal/inferior → trasero/superior:</strong> Ventiladores delanteros e inferiores soplan hacia adentro; el trasero y los superiores expulsan el aire caliente hacia fuera. El calor sube — aprovéchalo.</li>
+                        <li><strong>Gestión de cables:</strong> Los cables sueltos son el mayor obstáculo al flujo de aire. Usa bridas o velcro para recogerlos detrás de la bandeja de la placa base.</li>
+                        <li><strong>Tamaño de los ventiladores importa:</strong> Un ventilador de 140mm a 800rpm mueve más aire y hace menos ruido que uno de 120mm a 1200rpm.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================== -->
+        <!-- SECCIÓN 2: SOFTWARE        -->
+        <!-- =========================== -->
+        <section id="software" class="section bg-alt">
+            <div class="container">
+                <h2 class="section-title"><i class="fa-brands fa-windows" style="color: var(--secondary-color);"></i> Optimización de Software</h2>
+                <p class="section-intro">
+                    El hardware limpio no es suficiente si el software está saturado. Windows se llena de basura con el tiempo: archivos temporales, registros obsoletos, drivers desactualizados y programas 
+                    que se inician solos. Esta sección te explica cómo volver a tener un sistema ágil.
+                </p>
+
+                <div class="maint-section">
+                    <h3><i class="fa-solid fa-download"></i> Drivers: cuáles y cómo actualizarlos</h3>
+                    <p>Un driver desactualizado puede causar desde cuelgues hasta pérdidas de rendimiento del 15-20%. Estos son los más críticos:</p>
+                    <ul>
+                        <li><strong>GPU (tarjeta gráfica):</strong> Usa <strong>NVIDIA GeForce Experience</strong> si tienes una RTX/GTX, o <strong>AMD Adrenalin</strong> para tarjetas Radeon. Actualiza con cada nuevo juego importante — los fabricantes suelen lanzar drivers optimizados.</li>
+                        <li><strong>Chipset de la placa base:</strong> Descárgalos desde la web oficial del fabricante (ASUS, MSI, Gigabyte, ASRock). Mejoran la comunicación entre la CPU, la RAM y el almacenamiento.</li>
+                        <li><strong>Almacenamiento NVMe:</strong> Samsung Magician, Crucial Storage Executive o el software de tu fabricante de SSD. A veces incluyen correcciones de rendimiento importantes.</li>
+                        <li><strong>Audio y red:</strong> En general no es urgente, pero si tienes problemas de audio o WiFi inestable, revisa las versiones en la web de tu placa base.</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <p><strong>Consejo:</strong> Antes de actualizar los drivers de la GPU, usa <a href="https://www.guru3d.com/files-details/display-driver-uninstaller-download.html" target="_blank" style="color: var(--primary-color);">Display Driver Uninstaller (DDU)</a> en modo seguro para limpiar los drivers anteriores y evitar conflictos.</p>
+                    </div>
+
+                    <h3><i class="fa-solid fa-trash"></i> Limpieza de archivos temporales y basura</h3>
+                    <p>Windows acumula gigabytes de archivos innecesarios con el tiempo. Estos son los métodos más efectivos:</p>
+                    <ul>
+                        <li><strong>Liberador de espacio en disco (nativo):</strong> Busca "Liberador de espacio en disco" en el menú de inicio, selecciona el disco C: y haz clic en "Limpiar archivos del sistema". Puedes liberar 5-15GB sin riesgo.</li>
+                        <li><strong>%temp% y temp:</strong> Pulsa <kbd>Win + R</kbd>, escribe <strong>%temp%</strong> y borra todo lo que puedas (algunos archivos estarán en uso — sáltate esos). Repite con <strong>temp</strong> a secas.</li>
+                        <li><strong>CCleaner:</strong> Una herramienta gratuita que limpia caché del navegador, cookies, registros de instaladores y más. Úsalo con criterio — no toques el registro si no sabes lo que haces.</li>
+                        <li><strong>WinDirStat:</strong> Visualiza qué ocupa espacio en tu disco. Perfecto para encontrar carpetas gigantes olvidadas.</li>
+                    </ul>
+
+                    <h3><i class="fa-solid fa-shield-halved"></i> Seguridad: antivirus y malware</h3>
+                    <p>En 2025, <strong>Windows Defender</strong> es suficiente para la mayoría de usuarios domésticos si se mantiene actualizado. No necesitas instalar un antivirus de terceros que ralentice el sistema.</p>
+                    <ul>
+                        <li>Comprueba que Windows Defender está activo: <strong>Seguridad de Windows → Protección contra virus y amenazas</strong>.</li>
+                        <li>Haz un escaneo con <a href="https://www.malwarebytes.com/mwb-download" target="_blank" style="color: var(--primary-color);"><strong>Malwarebytes</strong></a> (gratuito) una vez al mes. Detecta adware y PUPs que Defender a veces pasa por alto.</li>
+                        <li>Evita instalar software de sitios no oficiales. Los <em>"cracks"</em> de juegos son el vector de infección más común.</li>
+                    </ul>
+
+                    <h3><i class="fa-solid fa-rocket"></i> Programas de inicio y rendimiento del sistema</h3>
+                    <p>Cada programa que se inicia con Windows consume RAM y CPU desde el primer segundo. Revísalos regularmente:</p>
+                    <ol>
+                        <li>Abre el <strong>Administrador de tareas</strong> (<kbd>Ctrl + Shift + Esc</kbd>).</li>
+                        <li>Ve a la pestaña <strong>"Inicio"</strong>.</li>
+                        <li>Desactiva todo lo que no necesites al encender el PC: Discord, Teams, Spotify, OneDrive, launchers de juegos que no uses a diario...</li>
+                        <li>Reinicia y nota la diferencia.</li>
+                    </ol>
+
+                    <div class="tip-box">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <p><strong>Extra:</strong> Activa el <strong>modo de alto rendimiento</strong> en la configuración de energía de Windows si tienes el PC enchufado. Ve a <em>Panel de control → Opciones de energía → Alto rendimiento</em>. Nota: consume más electricidad.</p>
+                    </div>
+
+                    <h3><i class="fa-solid fa-hard-drive"></i> Salud del almacenamiento</h3>
+                    <p>Los SSDs tienen una vida útil limitada en escrituras (TBW). Monitorizar la salud de los discos puede salvarte de perder datos importantes.</p>
+                    <ul>
+                        <li><strong>CrystalDiskInfo:</strong> Muestra la temperatura, número de horas de uso, sectores reasignados y el porcentaje de vida útil restante del SSD. Si ves "Precaución" o "Mala Condición", haz una copia de seguridad inmediatamente.</li>
+                        <li><strong>Desfragmentación:</strong> No desfragmentes SSDs — Windows lo sabe y no lo hace. Sí puedes usar <em>Optimizar unidades</em> que ejecuta un TRIM en los SSDs para mantenerlos en buen estado.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================== -->
+        <!-- SECCIÓN 3: TEMPERATURAS           -->
+        <!-- ================================== -->
+        <section id="temperaturas" class="section">
+            <div class="container">
+                <h2 class="section-title"><i class="fa-solid fa-temperature-full" style="color: var(--secondary-color);"></i> Control de Temperaturas</h2>
+                <p class="section-intro">
+                    El calor es el factor que más envejece los componentes. Mantener unas temperaturas correctas no es solo para gamers — 
+                    incluso en uso de oficina, un procesador constantemente caliente puede reducir su rendimiento a largo plazo mediante el <em>thermal throttling</em>.
+                </p>
+
+                <div class="maint-section">
+                    <h3><i class="fa-solid fa-table"></i> Rangos de temperatura seguros</h3>
+                    <div class="temp-grid">
+                        <div class="temp-card" style="background: rgba(16,185,129,0.1); border: 1px solid #10b981;">
+                            <div class="temp-val" style="color: #10b981;"><i class="fa-solid fa-check-circle"></i></div>
+                            <div class="temp-label">Normal / Ideal</div>
+                            <div class="temp-range">CPU en reposo: 30-45°C<br>CPU en carga: 60-75°C<br>GPU en carga: 60-80°C<br>SSD NVMe: 40-60°C</div>
+                        </div>
+                        <div class="temp-card" style="background: rgba(245,158,11,0.1); border: 1px solid #f59e0b;">
+                            <div class="temp-val" style="color: #f59e0b;"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                            <div class="temp-label">Atención</div>
+                            <div class="temp-range">CPU en carga: 75-85°C<br>GPU en carga: 80-88°C<br>SSD NVMe: 60-70°C<br>Requiere revisión</div>
+                        </div>
+                        <div class="temp-card" style="background: rgba(239,68,68,0.1); border: 1px solid #ef4444;">
+                            <div class="temp-val" style="color: #ef4444;"><i class="fa-solid fa-circle-exclamation"></i></div>
+                            <div class="temp-label">Peligro</div>
+                            <div class="temp-range">CPU en carga: +90°C<br>GPU en carga: +90°C<br>SSD NVMe: +70°C<br>Actúa inmediatamente</div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box" style="margin-top: 25px;">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <p><strong>Thermal Throttling:</strong> Cuando la CPU o GPU supera su temperatura límite, el sistema reduce automáticamente sus frecuencias para enfriarse. El resultado es una caída brusca de rendimiento. Puedes detectarlo en OCCT o HWMonitor si ves las frecuencias caer en picos mientras la temperatura está alta.</p>
+                    </div>
+
+                    <h3><i class="fa-solid fa-gauge-high"></i> Herramientas de monitoreo recomendadas</h3>
+                    <p>Estas son las herramientas gratuitas más usadas por la comunidad de PC enthusiasts:</p>
+
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <div>
+                            <div class="tool-name">HWMonitor</div>
+                            <div class="tool-desc">La herramienta más completa para ver en tiempo real: temperatura de CPU, GPU, placa base, discos y velocidad de ventiladores. Perfecta para tener en segundo plano mientras trabajas o juegas.</div>
+                            <a href="https://www.cpuid.com/softwares/hwmonitor.html" target="_blank" class="tool-link">Descargar gratis →</a>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fa-solid fa-gamepad"></i></div>
+                        <div>
+                            <div class="tool-name">MSI Afterburner</div>
+                            <div class="tool-desc">Imprescindible para gamers. Muestra las estadísticas en pantalla (temperatura, FPS, uso de GPU...) mientras juegas. También permite controlar la curva del ventilador de la GPU para un equilibrio perfecto entre ruido y temperatura.</div>
+                            <a href="https://www.msi.com/Landing/afterburner/graphics-cards" target="_blank" class="tool-link">Descargar gratis →</a>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fa-solid fa-microchip"></i></div>
+                        <div>
+                            <div class="tool-name">CPU-Z</div>
+                            <div class="tool-desc">Muestra información detallada sobre tu procesador, placa base y memoria RAM: voltajes, frecuencias, latencias y especificaciones exactas. También tiene una función de benchmark rápido.</div>
+                            <a href="https://www.cpuid.com/softwares/cpu-z.html" target="_blank" class="tool-link">Descargar gratis →</a>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fa-solid fa-display"></i></div>
+                        <div>
+                            <div class="tool-name">GPU-Z</div>
+                            <div class="tool-desc">Equivalente a CPU-Z pero para la tarjeta gráfica. Perfecta para verificar que tienes la GPU correcta, su VRAM, frecuencias de boost y para monitorear su temperatura y uso en tiempo real.</div>
+                            <a href="https://www.techpowerup.com/gpuz/" target="_blank" class="tool-link">Descargar gratis →</a>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fa-solid fa-hard-drive"></i></div>
+                        <div>
+                            <div class="tool-name">CrystalDiskInfo</div>
+                            <div class="tool-desc">Analiza la salud de tus SSDs y HDDs mediante los datos S.M.A.R.T. Detecta sectores defectuosos, sobrecalentamiento y el porcentaje de vida útil restante. Herramienta imprescindible antes de que falle un disco.</div>
+                            <a href="https://crystalmark.info/en/software/crystaldiskinfo/" target="_blank" class="tool-link">Descargar gratis →</a>
+                        </div>
+                    </div>
+
+                    <h3><i class="fa-solid fa-screwdriver-wrench"></i> ¿Qué hacer si el PC se calienta demasiado?</h3>
+                    <ol>
+                        <li><strong>Limpia el PC:</strong> El polvo es la causa más común. Sigue la guía de limpieza de arriba.</li>
+                        <li><strong>Aplica pasta térmica nueva</strong> en el procesador. Una pasta seca puede subir las temperaturas 10-20°C.</li>
+                        <li><strong>Comprueba los ventiladores:</strong> Abre HWMonitor y verifica que todos giran. Un ventilador muerto en el disipador de la CPU es catastrófico.</li>
+                        <li><strong>Revisa el flujo de aire:</strong> Recoloca los ventiladores siguiendo la dirección correcta (entrada frontal/inferior, salida trasera/superior).</li>
+                        <li><strong>Añade ventiladores extra:</strong> Si el chasis lo permite, añade ventiladores ARGB de 140mm. Una mejor ventilación reduce temperaturas y hace el PC más silencioso a baja velocidad.</li>
+                        <li><strong>Refrigeración líquida:</strong> Si tienes un procesador de gama alta (i9, Ryzen 9...) y el aire no es suficiente, una Closed-Loop Liquid Cooler (AIO) puede bajar la temperatura 15-25°C respecto a los disipadores de aire convencionales.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================== -->
+        <!-- SECCIÓN 4: TESTS          -->
+        <!-- ========================== -->
+        <section id="tests" class="section bg-alt">
+            <div class="container">
+                <h2 class="section-title"><i class="fa-solid fa-bolt" style="color: var(--secondary-color);"></i> Tests de Estrés</h2>
+                <p class="section-intro">
+                    Los tests de estrés someten a tu PC a una carga del 100% durante un tiempo prolongado para verificar que el hardware 
+                    es estable: que no se reinicia, no da pantallazos azules y las temperaturas se mantienen en rango. 
+                    Son esenciales después de montar un PC nuevo, cambiar la pasta térmica, hacer un overclocking o diagnosticar inestabilidades.
+                </p>
+
+                <div class="maint-section">
+                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Antes de empezar: precauciones importantes</h3>
+                    <div class="warning-box">
+                        <i class="fa-solid fa-eye"></i>
+                        <p><strong>No dejes el PC desatendido</strong> durante un test de estrés. Ten HWMonitor o OCCT abierto en segundo plano para monitorear temperaturas. Si la CPU supera los 90°C o la GPU los 88°C, <strong>detén el test inmediatamente</strong>.</p>
+                    </div>
+                    <ul>
+                        <li>Cierra todos los programas innecesarios antes de empezar (navegadores, juegos, antivirus en escaneo...).</li>
+                        <li>Conecta el PC a la corriente — nunca hagas tests en portátiles con batería.</li>
+                        <li>Ten abierto un monitor de temps (HWMonitor) en una segunda pantalla si puedes.</li>
+                        <li>Ejecuta los tests como Administrador para máximo acceso a sensores.</li>
+                    </ul>
+
+                    <h3 style="color: var(--primary-color);"><i class="fa-solid fa-star"></i> OCCT — La herramienta definitiva</h3>
+                    <p>
+                        <strong>OCCT (OverClock Checking Tool)</strong> es la herramienta de referencia en la comunidad overclocker para verificar la estabilidad de un PC. 
+                        La versión "Personal" es <strong>completamente gratuita</strong> para uso doméstico e incluye tests para CPU, GPU, RAM y fuente de alimentación.
+                        Descárgala desde la web oficial: <a href="https://www.ocbase.com/" target="_blank" style="color: var(--primary-color);">ocbase.com</a>
+                    </p>
+
+                    <p style="margin-bottom: 25px;">Una vez abierto el programa, verás un panel lateral izquierdo con todos los tipos de test disponibles. Aquí te explicamos cada uno:</p>
+
+                    <div class="occt-test">
+                        <h4><i class="fa-solid fa-microchip" style="color: var(--primary-color);"></i> Test CPU — Linpack <span class="badge-test badge-medium">Intensidad media</span></h4>
+                        <p>Somete el procesador a cálculos matemáticos complejos al 100% de su capacidad. Ideal para detectar inestabilidad del procesador o un overclock fallido. <strong>Duración recomendada: 20-30 minutos.</strong> Si el test pasa sin errores y las temperaturas son correctas, tu CPU es estable. Un error o reinicio durante el test indica problemas en la memoria caché, voltajes o temperatura.</p>
+                    </div>
+
+                    <div class="occt-test">
+                        <h4><i class="fa-solid fa-memory" style="color: var(--secondary-color);"></i> Test RAM — Memory <span class="badge-test badge-medium">Intensidad media</span></h4>
+                        <p>Escribe y lee patrones de datos en toda la memoria RAM para detectar errores. Es el primer test que deberías hacer si tienes pantallazos azules (BSOD) sin causa aparente. <strong>Duración recomendada: 30-60 minutos.</strong> Un error aquí puede indicar módulos de RAM defectuosos, perfil XMP/EXPO inestable, o los sticks mal encajados en los slots.</p>
+                    </div>
+
+                    <div class="occt-test">
+                        <h4><i class="fa-solid fa-display" style="color: #f59e0b;"></i> Test GPU — 3D <span class="badge-test badge-easy">Intensidad alta</span></h4>
+                        <p>Genera escenas 3D complejas para estresar la tarjeta gráfica al máximo. Detecta artefactos visuales (píxeles incorrectos, colores extraños), cierres inesperados o errores de VRAM. <strong>Duración recomendada: 20 minutos.</strong> Si ves artefactos en pantalla, tu GPU puede tener problemas de VRAM o ser un overclock demasiado agresivo.</p>
+                    </div>
+
+                    <div class="occt-test">
+                        <h4><i class="fa-solid fa-plug" style="color: #ef4444;"></i> Test Power Supply — CPU + GPU simultáneo <span class="badge-test badge-hard">Máxima intensidad</span></h4>
+                        <p>El test más exigente: pone a plena carga tanto la CPU como la GPU al mismo tiempo para estresar la <strong>fuente de alimentación (PSU)</strong>. Si el PC se reinicia o se apaga durante esta prueba, tu PSU puede ser insuficiente o estar fallando. <strong>Duración recomendada: 10-15 minutos</strong> (es muy intenso — no lo prolongues innecesariamente).</p>
+                    </div>
+
+                    <div class="tip-box" style="margin-top: 25px;">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <p><strong>Interpretando los resultados:</strong> OCCT muestra un contador de "Errors" en cada gráfico. <strong>0 errores</strong> = sistema estable. Cualquier error indica inestabilidad. También fíjate en los gráficos: si ves caídas bruscas de frecuencia, es señal de thermal throttling.</p>
+                    </div>
+
+                    <h3><i class="fa-solid fa-flask"></i> Otras herramientas de test complementarias</h3>
+
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                        <div>
+                            <div class="tool-name">Prime95</div>
+                            <div class="tool-desc">El test de estrés para CPU más conocido del mundo. Extremadamente exigente — genera más calor que casi cualquier carga real. Úsalo con "Small FFTs" para el peor escenario térmico posible.</div>
+                            <a href="https://www.mersenne.org/download/" target="_blank" class="tool-link">Descargar gratis →</a>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fa-solid fa-memory"></i></div>
+                        <div>
+                            <div class="tool-name">MemTest86</div>
+                            <div class="tool-desc">Arranca desde USB sin sistema operativo y realiza pruebas exhaustivas de todos los módulos RAM. Mucho más fiable que cualquier test que se haga desde Windows. Imprescindible si sospechas de RAM defectuosa.</div>
+                            <a href="https://www.memtest86.com/download.htm" target="_blank" class="tool-link">Descargar gratis →</a>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fa-solid fa-circle-nodes"></i></div>
+                        <div>
+                            <div class="tool-name">FurMark</div>
+                            <div class="tool-desc">El "donut" que todo overclocker conoce. Genera una escena de tórica muy pesada que lleva la GPU al límite absoluto. Perfecto para verificar la estabilidad de un overclock de GPU o detectar problemas térmicos rápidamente.</div>
+                            <a href="https://www.geeks3d.com/furmark/" target="_blank" class="tool-link">Descargar gratis →</a>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fa-solid fa-hard-drive"></i></div>
+                        <div>
+                            <div class="tool-name">CrystalDiskMark</div>
+                            <div class="tool-desc">Benchmark de velocidad de lectura/escritura para SSDs y HDDs. Compara tus resultados con las especificaciones del fabricante para detectar si el disco rinde por debajo de lo esperado.</div>
+                            <a href="https://crystalmark.info/en/software/crystaldiskmark/" target="_blank" class="tool-link">Descargar gratis →</a>
+                        </div>
+                    </div>
+
+                    <h3><i class="fa-solid fa-clock"></i> ¿Cuánto tiempo debo correr los tests?</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--primary-color);">
+                                    <th style="text-align: left; padding: 12px 15px; color: var(--text-muted);">Test</th>
+                                    <th style="text-align: center; padding: 12px 15px; color: var(--text-muted);">Mínimo</th>
+                                    <th style="text-align: center; padding: 12px 15px; color: var(--text-muted);">Recomendado</th>
+                                    <th style="text-align: center; padding: 12px 15px; color: var(--text-muted);">Overclock / Diagnóstico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 12px 15px;"><strong>OCCT CPU</strong></td>
+                                    <td style="text-align: center; padding: 12px 15px; color: var(--text-muted);">10 min</td>
+                                    <td style="text-align: center; padding: 12px 15px; color: #10b981;"><strong>30 min</strong></td>
+                                    <td style="text-align: center; padding: 12px 15px; color: var(--text-muted);">1-2 horas</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 12px 15px;"><strong>OCCT RAM</strong></td>
+                                    <td style="text-align: center; padding: 12px 15px; color: var(--text-muted);">20 min</td>
+                                    <td style="text-align: center; padding: 12px 15px; color: #10b981;"><strong>1 hora</strong></td>
+                                    <td style="text-align: center; padding: 12px 15px; color: var(--text-muted);">8+ horas</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 12px 15px;"><strong>OCCT GPU 3D</strong></td>
+                                    <td style="text-align: center; padding: 12px 15px; color: var(--text-muted);">10 min</td>
+                                    <td style="text-align: center; padding: 12px 15px; color: #10b981;"><strong>20 min</strong></td>
+                                    <td style="text-align: center; padding: 12px 15px; color: var(--text-muted);">1 hora</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 12px 15px;"><strong>OCCT Power (PSU)</strong></td>
+                                    <td style="text-align: center; padding: 12px 15px; color: var(--text-muted);">5 min</td>
+                                    <td style="text-align: center; padding: 12px 15px; color: #10b981;"><strong>15 min</strong></td>
+                                    <td style="text-align: center; padding: 12px 15px; color: var(--text-muted);">30 min</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px 15px;"><strong>MemTest86</strong></td>
+                                    <td style="text-align: center; padding: 12px 15px; color: var(--text-muted);">1 pasada</td>
+                                    <td style="text-align: center; padding: 12px 15px; color: #10b981;"><strong>2 pasadas</strong></td>
+                                    <td style="text-align: center; padding: 12px 15px; color: var(--text-muted);">Toda la noche</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section">
+            <div class="container" style="text-align: center;">
+                <h2 style="font-size: 2rem; margin-bottom: 15px;">¿Listo para configurar tu próximo PC?</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Usa nuestro configurador interactivo para elegir los componentes perfectos con verificación de compatibilidad en tiempo real.</p>
+                <a href="builder.html" class="btn btn-primary">Ir al Configurador <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo"><i class="fa-solid fa-microchip"></i> Mundo <span class="highlight">PC</span></div>
+                    <p>Tu guía de referencia para construir y mantener el PC perfecto.</p>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="builder.html">Configurador</a></li>
+                        <li><a href="mantenimiento.html">Mantenimiento</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mundo PC. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2 id="auth-title">Iniciar Sesión</h2>
+                <button class="close-modal" id="close-auth">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="auth-form">
+                    <div class="search-bar" style="margin-bottom: 15px;">
+                        <input type="email" id="auth-email" placeholder="Email" required style="padding-left: 15px;">
+                    </div>
+                    <div class="search-bar" style="margin-bottom: 20px;">
+                        <input type="password" id="auth-password" placeholder="Contraseña" required style="padding-left: 15px;">
+                    </div>
+                    <div id="auth-msg" style="margin-bottom: 15px; font-size: 0.85rem; display: none; padding: 10px; border-radius: 6px; text-align: center;"></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 15px;" id="auth-submit">Entrar</button>
+                    <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted);">
+                        <span id="auth-switch-text">¿No tienes cuenta?</span>
+                        <a href="#" id="auth-switch-btn" style="color: var(--primary-color);">Regístrate</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+    <script>
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+        if (localStorage.getItem('theme') === 'light') {
+            body.setAttribute('data-theme', 'light');
+            if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        themeToggle.addEventListener('click', () => {
+            if (body.hasAttribute('data-theme')) {
+                body.removeAttribute('data-theme');
+                if (themeIcon) themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+        navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { navLinks.classList.remove('open'); }); });
+    </script>
+</body>
+</html>

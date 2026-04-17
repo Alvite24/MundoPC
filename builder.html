@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurador Interactivo | Mundo PC</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="builder-page">
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html" style="color: inherit; text-decoration: none;">
+                    <i class="fa-solid fa-microchip"></i> Mundo <span class="highlight">PC</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="mantenimiento.html">Mantenimiento</a></li>
+                <li id="auth-node"><button class="btn btn-outline" id="login-btn" style="padding: 8px 16px; font-size: 0.9rem;">Iniciar Sesión</button></li>
+            </ul>
+            <div class="nav-controls">
+                <div class="theme-toggle">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                </div>
+                <div class="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="builder-main">
+        <div class="container builder-grid">
+            <!-- Left Column: Component Slots -->
+            <section class="components-column">
+                <div class="builder-header">
+                    <h1>Configurador Personalizado</h1>
+                    <p>Selecciona los componentes para tu próximo PC. Verificamos la compatibilidad por ti.</p>
+                </div>
+
+                <div class="slots-container">
+                    <!-- CPU Slot -->
+                    <div class="slot-card" data-category="cpu" id="slot-cpu">
+                        <div class="slot-icon"><i class="fa-solid fa-microchip"></i></div>
+                        <div class="slot-info">
+                            <h3>Procesador (CPU)</h3>
+                            <p class="selected-name">No seleccionado</p>
+                        </div>
+                        <button class="btn btn-outline select-btn">Seleccionar <i class="fa-solid fa-plus"></i></button>
+                    </div>
+
+                    <!-- Motherboard Slot -->
+                    <div class="slot-card" data-category="motherboard" id="slot-motherboard">
+                        <div class="slot-icon slot-img-box" id="img-motherboard">
+                            <!-- Image or Icon will go here -->
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <div class="slot-info">
+                            <h3>Placa Base</h3>
+                            <p class="selected-name">No seleccionado</p>
+                        </div>
+                        <button class="btn btn-outline select-btn">Seleccionar <i class="fa-solid fa-plus"></i></button>
+                    </div>
+
+                    <!-- RAM Slot -->
+                    <div class="slot-card" data-category="ram" id="slot-ram">
+                        <div class="slot-icon"><i class="fa-solid fa-memory"></i></div>
+                        <div class="slot-info">
+                            <h3>Memoria RAM</h3>
+                            <p class="selected-name">No seleccionado</p>
+                        </div>
+                        <button class="btn btn-outline select-btn">Seleccionar <i class="fa-solid fa-plus"></i></button>
+                    </div>
+
+                    <!-- GPU Slot -->
+                    <div class="slot-card" data-category="gpu" id="slot-gpu">
+                        <div class="slot-icon"><i class="fa-solid fa-vr-cardboard"></i></div>
+                        <div class="slot-info">
+                            <h3>Tarjeta Gráfica (GPU)</h3>
+                            <p class="selected-name">No seleccionado</p>
+                        </div>
+                        <button class="btn btn-outline select-btn">Seleccionar <i class="fa-solid fa-plus"></i></button>
+                    </div>
+
+                    <!-- Storage Slot -->
+                    <div class="slot-card" data-category="storage" id="slot-storage">
+                        <div class="slot-icon"><i class="fa-solid fa-hard-drive"></i></div>
+                        <div class="slot-info">
+                            <h3>Almacenamiento (SSD)</h3>
+                            <p class="selected-name">No seleccionado</p>
+                        </div>
+                        <button class="btn btn-outline select-btn">Seleccionar <i class="fa-solid fa-plus"></i></button>
+                    </div>
+
+                    <!-- PSU Slot -->
+                    <div class="slot-card" data-category="psu" id="slot-psu">
+                        <div class="slot-icon"><i class="fa-solid fa-plug"></i></div>
+                        <div class="slot-info">
+                            <h3>Fuente de Alimentación</h3>
+                            <p class="selected-name">No seleccionado</p>
+                        </div>
+                        <button class="btn btn-outline select-btn">Seleccionar <i class="fa-solid fa-plus"></i></button>
+                    </div>
+
+                    <!-- Case Slot -->
+                    <div class="slot-card" data-category="case" id="slot-case">
+                        <div class="slot-icon"><i class="fa-solid fa-box"></i></div>
+                        <div class="slot-info">
+                            <h3>Chasis / Caja</h3>
+                            <p class="selected-name">No seleccionado</p>
+                        </div>
+                        <button class="btn btn-outline select-btn">Seleccionar <i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Summary -->
+            <aside class="summary-column">
+                <div class="summary-card">
+                    <h2>Tu Configuración</h2>
+                    <div class="summary-items" id="summary-items">
+                        <p class="empty-msg">Empieza a añadir componentes...</p>
+                    </div>
+                    <div class="summary-divider"></div>
+                    
+                    <!-- Compatibility Section -->
+                    <div class="compatibility-card" id="compatibility-status">
+                        <div class="comp-icon"><i class="fa-solid fa-check-circle"></i></div>
+                        <div class="comp-text">
+                            <h4>Estado de Compatibilidad</h4>
+                            <p>Esperando componentes...</p>
+                        </div>
+                    </div>
+
+                    <div class="total-section">
+                        <span>Total Estimado:</span>
+                        <span class="total-price" id="total-price">0,00€</span>
+                    </div>
+                    <div class="sync-info" id="sync-info" style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 20px; text-align: center;">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Precios de referencia (Sincronizado: --/--/--)
+                    </div>
+                    <button class="btn btn-primary buy-all-btn" id="buy-all-btn" disabled>Comprar Todo <i class="fa-solid fa-cart-shopping"></i></button>
+                    <button class="btn btn-secondary save-build-btn" id="save-build-btn" style="width: 100%; margin-bottom: 10px; display: none;">Guardar Configuración <i class="fa-solid fa-cloud-arrow-up"></i></button>
+                    <button class="btn btn-secondary restart-btn" id="clear-btn">Limpiar Todo</button>
+                    <button class="btn btn-outline my-builds-btn" id="my-builds-btn" style="width: 100%; margin-top: 10px; display: none;">Mis Configuraciones <i class="fa-solid fa-folder-open"></i></button>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Selection Modal -->
+    <div class="modal" id="selection-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Seleccionar Componente</h2>
+                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="part-search" placeholder="Buscar componente...">
+                </div>
+                <div class="parts-list" id="parts-list">
+                    <!-- JS will populate this -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saved Builds Modal -->
+    <div class="modal" id="saved-builds-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Mis Configuraciones Guardadas</h2>
+                <button class="close-modal" id="close-builds-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="saved-builds-list">
+                    <!-- JS will populate this -->
+                    <p style="text-align: center; color: var(--text-muted); margin-top: 20px;">Cargando tus configuraciones...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2 id="auth-title">Iniciar Sesión</h2>
+                <button class="close-modal" id="close-auth">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="auth-form">
+                    <div class="search-bar" style="margin-bottom: 15px;">
+                        <input type="email" id="auth-email" placeholder="Email" required style="padding-left: 15px;">
+                    </div>
+                    <div class="search-bar" style="margin-bottom: 20px;">
+                        <input type="password" id="auth-password" placeholder="Contraseña" required style="padding-left: 15px;">
+                    </div>
+                    <div id="auth-msg" style="margin-bottom: 15px; font-size: 0.85rem; display: none; padding: 10px; border-radius: 6px; text-align: center;"></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 15px;" id="auth-submit">Entrar</button>
+                    <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted);">
+                        <span id="auth-switch-text">¿No tienes cuenta?</span> 
+                        <a href="#" id="auth-switch-btn" style="color: var(--primary-color);">Regístrate</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/builder.js"></script>
+    <script>
+        // Theme toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.setAttribute('data-theme', 'light');
+            if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        themeToggle.addEventListener('click', () => {
+            if (document.body.hasAttribute('data-theme')) {
+                document.body.removeAttribute('data-theme');
+                if (themeIcon) themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        // Hamburger
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => { navLinks.classList.remove('open'); });
+        });
+    </script>
+</body>
+</html>
