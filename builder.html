@@ -217,32 +217,6 @@
 
     <script src="assets/js/auth.js"></script>
     <script src="assets/js/builder.js"></script>
-    <script>
-        // Theme toggle
-        const themeToggle = document.querySelector('.theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.setAttribute('data-theme', 'light');
-            if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
-        }
-        themeToggle.addEventListener('click', () => {
-            if (document.body.hasAttribute('data-theme')) {
-                document.body.removeAttribute('data-theme');
-                if (themeIcon) themeIcon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-                if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-        // Hamburger
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => { navLinks.classList.remove('open'); });
-        });
-    </script>
+    <script src="assets/js/layout.js"></script>
 </body>
 </html>

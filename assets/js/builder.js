@@ -295,27 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateStr = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()}`;
     syncInfoEl.innerHTML = `<i class="fa-solid fa-clock-rotate-left"></i> Precios de referencia (Sincronizado: ${dateStr})`;
 
-    // Header Links Toggle
-    const themeToggle = document.querySelector('.theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const body = document.body;
 
-    if (localStorage.getItem('theme') === 'light') {
-        body.setAttribute('data-theme', 'light');
-        if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
-    }
-
-    themeToggle.addEventListener('click', () => {
-        if (body.hasAttribute('data-theme')) {
-            body.removeAttribute('data-theme');
-            if (themeIcon) themeIcon.classList.replace('fa-sun', 'fa-moon');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            body.setAttribute('data-theme', 'light');
-            if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
-            localStorage.setItem('theme', 'light');
-        }
-    });
 
     document.querySelectorAll('.slot-card').forEach(card => {
         card.querySelector('.select-btn').addEventListener('click', () => {
