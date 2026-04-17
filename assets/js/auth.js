@@ -1,6 +1,6 @@
 // --- Supabase Configuration ---
-const SUPABASE_URL = 'https://ktvmekzhyicftdgilnrh.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0dm1la3poeWljZnRkZ2lsbnJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MzA2ODYsImV4cCI6MjA5MjAwNjY4Nn0.w71c8cUT-W2oec7ZP7KdHoWvn86lStLASMyBsv1H70g';
+const SUPABASE_URL = 'https://beernwsshytvdoweudzr.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJlZXJud3NzaHl0dmRvd2V1ZHpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MzgyMDYsImV4cCI6MjA5MjAxNDIwNn0.dy-XVfnP_vpa_buH_tDxMLLEf7dylt6xfJnRYOEeNRQ';
 
 // The global variable from the CDN is 'supabase'
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
