@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-i1",
             "name": "Intel Core i9-14900K",
-            "price": 771.47,
+            "price": 765.86,
             "socket": "LGA1700",
             "tdp": 253,
             "description": "24 núcleos, 32 hilos, 6.0GHz"
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-i2",
             "name": "Intel Core i7-14700K",
-            "price": 411.95,
+            "price": 415.63,
             "socket": "LGA1700",
             "tdp": 253,
             "description": "20 núcleos, 28 hilos, 5.6GHz"
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-i3",
             "name": "Intel Core i5-14600K",
-            "price": 320.27,
+            "price": 320.78,
             "socket": "LGA1700",
             "tdp": 181,
             "description": "14 núcleos, 20 hilos, 5.3GHz"
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-i4",
             "name": "Intel Core i5-13400F",
-            "price": 139,
+            "price": 137.17,
             "socket": "LGA1700",
             "tdp": 148,
             "description": "10 núcleos, 16 hilos, 4.6GHz"
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-i5",
             "name": "Intel Core i3-12100F",
-            "price": 87.05,
+            "price": 85.95,
             "socket": "LGA1700",
             "tdp": 89,
             "description": "4 núcleos, 8 hilos, 4.3GHz"
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-a1",
             "name": "AMD Ryzen 9 9950X",
-            "price": 1562.96,
+            "price": 1577.45,
             "socket": "AM5",
             "tdp": 170,
             "description": "16 núcleos, 32 hilos, 5.7GHz (Zen 5)"
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-a2",
             "name": "AMD Ryzen 7 9800X3D",
-            "price": 282.15,
+            "price": 283.43,
             "socket": "AM5",
             "tdp": 120,
             "description": "8 núcleos, 16 hilos, 3D V-Cache (Gaming King)"
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-a3",
             "name": "AMD Ryzen 7 9700X",
-            "price": 302.12,
+            "price": 309.5,
             "socket": "AM5",
             "tdp": 65,
             "description": "8 núcleos, 16 hilos, eficiente Zen 5"
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-a4",
             "name": "AMD Ryzen 5 9600X",
-            "price": 171.08,
+            "price": 168.16,
             "socket": "AM5",
             "tdp": 65,
             "description": "6 núcleos, 12 hilos, Zen 5"
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-a5",
             "name": "AMD Ryzen 7 7800X3D",
-            "price": 450.35,
+            "price": 428,
             "socket": "AM5",
             "tdp": 120,
             "description": "8 núcleos, 16 hilos, 3D V-Cache"
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-a6",
             "name": "AMD Ryzen 5 7600X",
-            "price": 462.68,
+            "price": 444.43,
             "socket": "AM5",
             "tdp": 105,
             "description": "6 núcleos, 12 hilos, 5.3GHz"
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-a7",
             "name": "AMD Ryzen 7 5800X3D",
-            "price": 199.53,
+            "price": 200.49,
             "socket": "AM4",
             "tdp": 105,
             "description": "El mejor para AM4 Gaming"
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-a8",
             "name": "AMD Ryzen 5 5600X",
-            "price": 121.61,
+            "price": 122.89,
             "socket": "AM4",
             "tdp": 65,
             "description": "6 núcleos, 12 hilos, leyenda AM4"
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cpu-a9",
             "name": "AMD Ryzen 5 5500",
-            "price": 75.89,
+            "price": 77.76,
             "socket": "AM4",
             "tdp": 65,
             "description": "La opción más barata para AM4"
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "mb-i1",
             "name": "ASUS ROG MAXIMUS Z790 HERO",
-            "price": 1068.89,
+            "price": 1038.03,
             "socket": "LGA1700",
             "ramType": "DDR5",
             "description": "Gama ultra-entusiasta",
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "mb-i2",
             "name": "MSI PRO Z790-A WIFI",
-            "price": 339.29,
+            "price": 338.64,
             "socket": "LGA1700",
             "ramType": "DDR5",
             "description": "Gama alta equilibrada",
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "mb-i3",
             "name": "Gigabyte B760 GAMING X",
-            "price": 143.81,
+            "price": 139.38,
             "socket": "LGA1700",
             "ramType": "DDR5",
             "description": "Gama media versátil",
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "mb-i4",
             "name": "ASRock H610M-HDV",
-            "price": 47.52,
+            "price": 49.63,
             "socket": "LGA1700",
             "ramType": "DDR4",
             "description": "Básica y compacta",
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "mb-a1",
             "name": "ASUS ROG CROSSHAIR X870E HERO",
-            "price": 733.07,
+            "price": 697.18,
             "socket": "AM5",
             "ramType": "DDR5",
             "description": "El tope de gama para Zen 5",
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "mb-a2",
             "name": "Gigabyte X870 AORUS ELITE",
-            "price": 354.08,
+            "price": 339.56,
             "socket": "AM5",
             "ramType": "DDR5",
             "description": "Alto rendimiento AM5",
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "mb-a3",
             "name": "MSI B650 GAMING PLUS WIFI",
-            "price": 184.17,
+            "price": 176.2,
             "socket": "AM5",
             "ramType": "DDR5",
             "description": "Calidad/Precio AM5",
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "mb-a4",
             "name": "ASRock A620M-HDV",
-            "price": 168.11,
+            "price": 161.39,
             "socket": "AM5",
             "ramType": "DDR5",
             "description": "Económica para AM5",
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "mb-a5",
             "name": "MSI MAG B550 TOMAHAWK",
-            "price": 86.63,
+            "price": 87.72,
             "socket": "AM4",
             "ramType": "DDR4",
             "description": "La mejor B550",
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "mb-a6",
             "name": "Gigabyte B450M DS3H",
-            "price": 98.1,
+            "price": 94.23,
             "socket": "AM4",
             "ramType": "DDR4",
             "description": "Súper ventas económico",
@@ -211,42 +211,42 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "ram-d5-1",
             "name": "CORSAIR Vengeance 32GB (2x16) DDR5 6000MHz",
-            "price": 154.6,
+            "price": 152.03,
             "type": "DDR5",
             "description": "Optimizado para AMD/Intel"
         },
         {
             "id": "ram-d5-2",
             "name": "G.Skill Trident Z5 RGB 32GB DDR5 6400MHz",
-            "price": 100.67,
+            "price": 105.25,
             "type": "DDR5",
             "description": "Premium con RGB"
         },
         {
             "id": "ram-d5-3",
             "name": "Crucial 16GB (1x16) DDR5 4800MHz",
-            "price": 50.51,
+            "price": 50.78,
             "type": "DDR5",
             "description": "Básico DDR5"
         },
         {
             "id": "ram-d4-1",
             "name": "Kingston FURY Beast 16GB (2x8) DDR4 3200MHz",
-            "price": 42.52,
+            "price": 41.49,
             "type": "DDR4",
             "description": "Estándar oro DDR4"
         },
         {
             "id": "ram-d4-2",
             "name": "Corsair Vengeance LPX 32GB DDR4 3600MHz",
-            "price": 128.82,
+            "price": 129.28,
             "type": "DDR4",
             "description": "Ideal para edición"
         },
         {
             "id": "ram-d4-3",
             "name": "G.Skill Aegis 8GB DDR4 3000MHz",
-            "price": 20.03,
+            "price": 20.34,
             "type": "DDR4",
             "description": "Presupuesto ajustado"
         }
@@ -255,63 +255,63 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "gpu-59",
             "name": "NVIDIA GeForce RTX 5090 24GB",
-            "price": 1027.38,
+            "price": 1000.41,
             "minPsu": 850,
             "description": "La reina absoluta (Next-Gen)"
         },
         {
             "id": "gpu-58",
             "name": "NVIDIA GeForce RTX 5080 16GB",
-            "price": 1004.7,
+            "price": 998.24,
             "minPsu": 750,
             "description": "Potencia 4K extrema"
         },
         {
             "id": "gpu-48s",
             "name": "NVIDIA GeForce RTX 4080 Super 16GB",
-            "price": 777.26,
+            "price": 788.96,
             "minPsu": 750,
             "description": "Alto rendimiento 4K"
         },
         {
             "id": "gpu-47s",
             "name": "NVIDIA GeForce RTX 4070 Super 12GB",
-            "price": 583.3,
+            "price": 601.85,
             "minPsu": 650,
             "description": "La mejor calidad/precio 1440p"
         },
         {
             "id": "gpu-46",
             "name": "NVIDIA GeForce RTX 4060 8GB",
-            "price": 411.48,
+            "price": 415.93,
             "minPsu": 500,
             "description": "Eficiencia y DLSS 3.0"
         },
         {
             "id": "gpu-97",
             "name": "AMD Radeon RX 9070 XT 20GB",
-            "price": 849.16,
+            "price": 828.92,
             "minPsu": 750,
             "description": "Potencia AMD Zen 5 era"
         },
         {
             "id": "gpu-79",
             "name": "AMD Radeon RX 7900 XTX 24GB",
-            "price": 643.61,
+            "price": 669.27,
             "minPsu": 800,
             "description": "Tope de gama AMD"
         },
         {
             "id": "gpu-78",
             "name": "AMD Radeon RX 7800 XT 16GB",
-            "price": 564.82,
+            "price": 581.83,
             "minPsu": 700,
             "description": "Gran opción 1440p"
         },
         {
             "id": "gpu-base",
             "name": "AMD Radeon RX 6600 8GB",
-            "price": 175.94,
+            "price": 178.76,
             "minPsu": 450,
             "description": "1080p imbatible"
         }
@@ -320,31 +320,31 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "st-5",
             "name": "Crucial T705 2TB NVMe PCIe 5.0",
-            "price": 209.4,
+            "price": 216.66,
             "description": "Velocidad de hasta 14.500 MB/s"
         },
         {
             "id": "st-4",
             "name": "Samsung 990 Pro 2TB Gen4",
-            "price": 75.42,
+            "price": 74.86,
             "description": "El estándar de los profesionales"
         },
         {
             "id": "st-3",
             "name": "WD Black SN850X 1TB Gen4",
-            "price": 49.99,
+            "price": 49.42,
             "description": "Excelente para gaming"
         },
         {
             "id": "st-2",
             "name": "Crucial P3 Plus 1TB Gen4",
-            "price": 39.79,
+            "price": 39.39,
             "description": "Calidad/Precio inmejorable"
         },
         {
             "id": "st-1",
             "name": "Kingston NV2 500GB Gen4",
-            "price": 40.64,
+            "price": 39.51,
             "description": "Básico pero rápido"
         }
     ],
@@ -352,28 +352,28 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "psu-4",
             "name": "Corsair RM1000x 80+ Gold",
-            "price": 125.52,
+            "price": 126.91,
             "watts": 1000,
             "description": "Potencia para cualquier build"
         },
         {
             "id": "psu-3",
             "name": "NZXT C850 80+ Gold Modular",
-            "price": 116.39,
+            "price": 118.95,
             "watts": 850,
             "description": "Ideal para gráficas de gama alta"
         },
         {
             "id": "psu-2",
             "name": "Seasonic Focus GX-750W",
-            "price": 123.72,
+            "price": 121.45,
             "watts": 750,
             "description": "Calidad legendaria"
         },
         {
             "id": "psu-1",
             "name": "Evga 600W 80+ White",
-            "price": 96.38,
+            "price": 91.59,
             "watts": 600,
             "description": "Opción económica fiable"
         }
@@ -382,25 +382,25 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             "id": "cs-4",
             "name": "Lian Li O11 Dynamic EVO",
-            "price": 111.71,
+            "price": 109.58,
             "description": "La vitrina favorita de los entusiastas"
         },
         {
             "id": "cs-3",
             "name": "Corsair 4000D Airflow",
-            "price": 157.64,
+            "price": 152.33,
             "description": "Referencia en ventilación"
         },
         {
             "id": "cs-2",
             "name": "NZXT H5 Flow",
-            "price": 145.26,
+            "price": 147.25,
             "description": "Elegancia y temperatura"
         },
         {
             "id": "cs-1",
             "name": "Montech AIR 903 MAX",
-            "price": 40.04,
+            "price": 38.19,
             "description": "Incluye 4 ventiladores ARGB"
         }
     ]
@@ -624,7 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pre-populate with a demo timestamp
     const now = new Date();
     const dateStr = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()}`;
-    syncInfoEl.innerHTML = `<i class="fa-solid fa-clock-rotate-left"></i> Precios de referencia (Sincronizado: 25/10/2026)`;
+    syncInfoEl.innerHTML = `<i class="fa-solid fa-clock-rotate-left"></i> Precios de referencia (Sincronizado: 26/10/2026)`;
 
 
 
